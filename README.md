@@ -4,4 +4,4 @@ This is a template project for a github project including:
  * poetry project file
  * benchmarking support
  
- After creating a project from this template- replace all occurrences of `<$...$>` (regex: `<\$[^\&]\$>`) with their appropriate values for your project.
+ After creating a project from this template- replace all occurrences of `<$...$>` (regex: `<\$[^\&]*\$>`) with their appropriate values for your project.
