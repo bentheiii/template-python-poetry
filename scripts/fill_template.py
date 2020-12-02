@@ -311,8 +311,9 @@ def main():
     pkg_name = made_decisions['package']
     package_dir = (project_root / pkg_name)
     package_dir.mkdir(exist_ok=True)
+    initial_version = made_decisions['inital_version']
     ver_path = (package_dir / "_version.py")
-    ver_path.write_text("__version__ = 0.0.1dev")
+    ver_path.write_text(f"__version__ = '{initial_version}'")
     run_and_get(f'git add {ver_path.relative_to(project_root)}')
 
     if args.del_script:
@@ -330,7 +331,7 @@ def quote(x):
 def quote_each(x):
     if isinstance(x, str):
         x = [a.strip() for a in x.split(',F')]
-    return '['+', '.join(quote(a) for a in x)+']'
+    return '['+', '.join(quote(a) for a in x.parts)+']'
 
 def custom_text_hotswap(method: str):
     def ret(x: str):
