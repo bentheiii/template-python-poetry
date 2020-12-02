@@ -5,6 +5,7 @@ from argparse import ArgumentParser
 from datetime import datetime
 from pathlib import Path
 from pprint import pprint
+from os import chdir
 from typing import Mapping, Iterable, NamedTuple, Pattern, Callable, Optional, Any, Match
 
 if sys.version_info < (3, 7, 0):
@@ -213,6 +214,7 @@ def main():
     project_root = Path('.').absolute()
     if project_root.name == 'scripts':
         project_root = project_root.parent
+    chdir(str(project_root))
 
     decisions['package'].add_option(DecisionOption('folder_name', project_root.name))
     decisions['year'].add_option(DecisionOption('current year', str(datetime.now().year)))
@@ -283,7 +285,8 @@ def main():
     (package_dir / "_version.py").write_text("__version__ = 0.0.1dev")
 
     if args.del_script:
-        
+        script_path = project_root / "scripts/fill_template.py"
+        run_and_get(f'git rm {script_path.relative_to(project_root)}')
 
 
 
