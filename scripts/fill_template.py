@@ -56,12 +56,12 @@ class DecisionResolver:
         options = list(self.options())
         msg = [f'enter value for {name}:']
         for i, option in enumerate(options, 1):
-            msg.append(f'{i}: {option.name} ({option.value})')
+            msg.append(f'\t{i}: {option.name} ({option.value})')
         if self.custom_option:
-            msg.append('t: custom text')
+            msg.append('\tt: custom text')
         response = input('\n'.join(msg) + '\n')
         try:
-            response_int = int(response)
+            response_int = int(response)-1
         except ValueError:
             pass
         else:
@@ -144,6 +144,9 @@ class Authors:
 
     def split(self):
         return self.parts
+
+    def __str__(self):
+        return ', '.join(self.parts)
 
 
 class PyVersions:
