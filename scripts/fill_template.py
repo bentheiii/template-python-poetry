@@ -156,7 +156,7 @@ class Authors:
         return str(self)
 
     def format_map(self, m):
-        self.parts = [p.format_map(m) for p in self.parts]
+        return type(self)(', '.join(p.format_map(m) for p in self.parts))
 
 
 class PyVersions:
@@ -313,7 +313,7 @@ def main():
 
     pkg_name = made_decisions['package']
     package_dir = (project_root / pkg_name)
-    package_dir.mkdir()
+    package_dir.mkdir(exist_ok=True)
     ver_path = (package_dir / "_version.py")
     ver_path.write_text("__version__ = 0.0.1dev")
     run_and_get(f'git add {ver_path.relative_to(project_root)}')
