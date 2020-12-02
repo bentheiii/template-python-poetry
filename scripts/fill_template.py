@@ -32,7 +32,7 @@ class DecisionOption(NamedTuple):
         chars_left = DESCRIPTION_MAX_LEN - len(self.name) - 3
         if chars_left <= 0:
             return self.name
-        printable_value = self.value or repr(self.value)
+        printable_value = str(self.value)
         if len(printable_value) <= chars_left:
             return f'{self.name} ({printable_value})'
         chars_left -= 2
@@ -56,7 +56,7 @@ class DecisionResolver:
         options = list(self.options())
         msg = [f'enter value for {name}:']
         for i, option in enumerate(options, 1):
-            msg.append(f'\t{i}: {option.name} ({option.value})')
+            msg.append(f'\t{i}: {option.describe()}')
         if self.custom_option:
             msg.append('\tt: custom text')
         response = input('\n'.join(msg) + '\n')
@@ -157,6 +157,9 @@ class PyVersions:
 
     def minors(self):
         return ', '.join(self._minors)
+
+    def __str__(self):
+        return self.semver
 
 
 # endregion
