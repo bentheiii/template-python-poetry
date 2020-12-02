@@ -309,3 +309,6 @@ def custom_text_hotswap(method: str):
 preferred = custom_text_hotswap('preferred')
 split = custom_text_hotswap('short')
 semver = custom_text_hotswap('semver')
+
+if __name__ == '__main__':
+    main()
