@@ -146,9 +146,6 @@ class Authors:
     def __init__(self, x: str):
         self.parts = [a.strip() for a in x.split(',')]
 
-    def split(self):
-        return self.parts
-
     def __str__(self):
         return ', '.join(self.parts)
 
@@ -322,7 +319,7 @@ def main():
         script_path = project_root / "scripts/fill_template.py"
         run_and_get(f'git rm {script_path.relative_to(project_root)}')
 
-    (project_root / "README.md").write_text("")
+    (project_root / "README.md").write_text(f"# {pkg_name}")
 
 
 def quote(x):
@@ -330,6 +327,10 @@ def quote(x):
     x = x.replace('"', r'\"')
     return '"' + x + '"'
 
+def quote_each(x):
+    if isinstance(x, str):
+        x = [a.strip() for a in x.split(',F')]
+    return '['+', '.join(quote(a) for a in x)+']'
 
 def custom_text_hotswap(method: str):
     def ret(x: str):

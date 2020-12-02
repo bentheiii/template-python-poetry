@@ -2,7 +2,7 @@
 name = <$package!quote$>
 version = <$inital_version!quote$>
 description = <$description!quote$>
-authors = <$authors!split!quote$>
+authors = <$authors!quote_each$>
 license = <$license!short!quote$>
 readme = "README.md"
 repository = <$repo_link!quote$>
