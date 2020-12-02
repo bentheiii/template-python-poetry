@@ -307,6 +307,8 @@ def main():
         script_path = project_root / "scripts/fill_template.py"
         run_and_get(f'git rm {script_path.relative_to(project_root)}')
 
+    (project_root / "README.md").write_text("")
+
 
 def quote(x):
     x = str(x)
