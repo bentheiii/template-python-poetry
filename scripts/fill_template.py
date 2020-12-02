@@ -276,8 +276,8 @@ def main():
     def repl(match: Match[str]):
         def inner(x: str):
             first, _, second = x.rpartition('!')
-            if not second:
-                return made_decisions[first]
+            if not first:
+                return made_decisions[second]
             evaled_first = inner(first)
             evaled_second = getattr(evaled_first, second, None)
             if evaled_second is None:
