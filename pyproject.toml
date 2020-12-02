@@ -1,17 +1,17 @@
 [tool.poetry]
-name = <$packagename$>
-version = "0.0.1.dev"
-description = <$$>
-authors = [<$$>]
-license = <$$>
+name = <$package!quote$>
+version = <$inital_version$>
+description = <$description!quote$>
+authors = <$authors!split!quote$>
+license = <$license!short!quote$>
 readme = "README.md"
-repository = <$$>
+repository = <$repo_link!quote$>
 packages = [
-    {include=<$$>}
+    {include=<$package!quote$>}
 ]
 
 [tool.poetry.dependencies]
-python = <$$>
+python = <$py_versions!semver!quote$>
 
 [tool.poetry.dev-dependencies]
 pydantic = "*"

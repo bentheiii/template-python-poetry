@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = '<$package$>'
-copyright = '<$year$>, <$author$>'
-author = '<$author$>'
+copyright = '<$year$>, <$authors$>'
+author = '<$authors$>'
 
 
 # -- General configuration ---------------------------------------------------
