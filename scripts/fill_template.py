@@ -289,7 +289,7 @@ def main():
 
         try:
             original = file.read_text()
-        except UnicodeError:
+        except (UnicodeError, OSError):
             continue
         if args.backup and any(pattern.finditer(original)):
             backup = file.with_suffix('.bkp')
