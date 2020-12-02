@@ -282,7 +282,9 @@ def main():
     pkg_name = made_decisions['package']
     package_dir = (project_root / pkg_name)
     package_dir.mkdir()
-    (package_dir / "_version.py").write_text("__version__ = 0.0.1dev")
+    ver_path = (package_dir / "_version.py")
+    ver_path.write_text("__version__ = 0.0.1dev")
+    run_and_get(f'git add {ver_path.relative_to(project_root)}')
 
     if args.del_script:
         script_path = project_root / "scripts/fill_template.py"
