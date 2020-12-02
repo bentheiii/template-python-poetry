@@ -14,7 +14,8 @@ if sys.version_info < (3, 7, 0):
 
 def make_parser():
     ret = ArgumentParser()
-    ret.add_argument('--delete-script', action='store_const', const=True, default=False, required=False, dest='del_script')
+    ret.add_argument('--delete-script', action='store_const', const=True, default=False, required=False,
+                     dest='del_script')
     ret.add_argument('--backup', action='store_const', const=True, default=False, required=False, dest='backup')
     return ret
 
@@ -278,7 +279,6 @@ def main():
             backup.write_text(original)
         pattern.sub(repl, original)
 
-
     pkg_name = made_decisions['package']
     package_dir = (project_root / pkg_name)
     package_dir.mkdir()
@@ -287,7 +287,6 @@ def main():
     if args.del_script:
         script_path = project_root / "scripts/fill_template.py"
         run_and_get(f'git rm {script_path.relative_to(project_root)}')
-
 
 
 def quote(x):
