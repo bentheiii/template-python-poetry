@@ -102,8 +102,7 @@ class ConstResolver(RegexDecisionValidator):
 
     def load_resolved(self, resolved: Mapping[str, Any]):
         self._options = [
-            DecisionOption(do.name,
-                           do.value.format_map(resolved) if hasattr(do.value, 'format_mapped') else do.value)
+            DecisionOption(do.name, do.value.format_map(resolved))
             for do in self._options
         ]
 
@@ -156,6 +155,9 @@ class Authors:
     def __repr__(self):
         return str(self)
 
+    def format_map(self, m):
+        self.parts = [p.format_map(m) for p in self.parts]
+
 
 class PyVersions:
     def __init__(self, semver, minors, preferred):
@@ -171,6 +173,9 @@ class PyVersions:
 
     def __repr__(self):
         return self.semver
+
+    def format_map(self, m):
+        return self
 
 
 # endregion
