@@ -282,7 +282,7 @@ def main():
             evaled_second = getattr(evaled_first, second, None)
             if evaled_second is None:
                 second_callback = eval(second)
-                evaled_second = second_callback(evaled_second)
+                evaled_second = second_callback(evaled_first)
             if callable(evaled_second):
                 evaled_second = evaled_second()
             return evaled_second
