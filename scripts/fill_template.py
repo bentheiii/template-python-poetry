@@ -21,7 +21,7 @@ def make_parser():
 
 
 # region decisions
-DESCRIPTION_MAX_LEN: int = 20
+DESCRIPTION_MAX_LEN: int = 64
 
 
 class DecisionOption(NamedTuple):
@@ -33,6 +33,8 @@ class DecisionOption(NamedTuple):
         if chars_left <= 0:
             return self.name
         printable_value = str(self.value)
+        if printable_value == self.name:
+            return self.name
         if len(printable_value) <= chars_left:
             return f'{self.name} ({printable_value})'
         chars_left -= 2
@@ -66,7 +68,7 @@ class DecisionResolver:
             pass
         else:
             if response_int < len(options):
-                return options[response_int]
+                return options[response_int].value
 
         if self.custom_option and response == 't':
             custom = input('enter custom text:\n')
@@ -96,7 +98,7 @@ class ConstResolver(RegexDecisionValidator):
     def __init__(self, options: Iterable[DecisionOption] = (), pattern: Pattern = None,
                  pattern_description: str = 'pattern'):
         super().__init__(pattern, pattern_description)
-        self._options = set(options)
+        self._options = list(options)
 
     def load_resolved(self, resolved: Mapping[str, Any]):
         self._options = {
@@ -106,7 +108,7 @@ class ConstResolver(RegexDecisionValidator):
         }
 
     def add_option(self, option: DecisionOption):
-        self._options.add(option)
+        self._options.append(option)
 
     def options(self) -> Iterable[DecisionOption]:
         return self._options
@@ -137,6 +139,9 @@ class License:
     def __str__(self):
         return self.long
 
+    def __repr__(self):
+        return self.short
+
 
 class Authors:
     def __init__(self, x: str):
@@ -147,6 +152,9 @@ class Authors:
 
     def __str__(self):
         return ', '.join(self.parts)
+
+    def __repr__(self):
+        return str(self)
 
 
 class PyVersions:
@@ -159,6 +167,9 @@ class PyVersions:
         return ', '.join(self._minors)
 
     def __str__(self):
+        return self.semver
+
+    def __repr__(self):
         return self.semver
 
 
