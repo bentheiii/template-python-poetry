@@ -63,7 +63,7 @@ class DecisionResolver:
             msg.append('\tt: custom text')
         response = input('\n'.join(msg) + '\n')
         try:
-            response_int = int(response)-1
+            response_int = int(response) - 1
         except ValueError:
             pass
         else:
@@ -206,8 +206,15 @@ initial_version_options = [
     DecisionOption('0.1.0.dev', '0.1.0.dev'),
     DecisionOption('1.0.0.dev', '1.0.0.dev'),
 ]
+
+description_options = [
+    DecisionOption('blank', ''),
+    DecisionOption('package', '{package}'),
+]
+
 decisions = {
     'package': ConstResolver(pattern=re.compile('[a-zA-Z][a-zA-Z0-9_]*')),
+    'description': ConstResolver(description_options, pattern=re.compile('.*')),
     'authors': AuthorsResolver(),
     'year': ConstResolver(pattern=re.compile('[0-9]{4}')),
     'repo_link': ConstResolver(pattern=re.compile('.*')),
