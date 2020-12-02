@@ -302,7 +302,9 @@ def main():
         if args.backup and any(pattern.finditer(original)):
             backup = file.with_suffix('.bkp')
             backup.write_text(original)
-        pattern.sub(repl, original)
+        out, n = pattern.subn(repl, original)
+        if n:
+            file.write_text(out)
 
     pkg_name = made_decisions['package']
     package_dir = (project_root / pkg_name)
