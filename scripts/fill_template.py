@@ -101,11 +101,11 @@ class ConstResolver(RegexDecisionValidator):
         self._options = list(options)
 
     def load_resolved(self, resolved: Mapping[str, Any]):
-        self._options = {
+        self._options = [
             DecisionOption(do.name,
                            do.value.format_map(resolved) if hasattr(do.value, 'format_mapped') else do.value)
             for do in self._options
-        }
+        ]
 
     def add_option(self, option: DecisionOption):
         self._options.append(option)
@@ -261,6 +261,7 @@ def main():
     made_decisions = {}
 
     for name, resolver in decisions.items():
+        resolver.load_resolved(made_decisions)
         made_decisions[name] = resolver.make(name)
 
     print('You are about to fill the project with the following values.'
@@ -274,7 +275,7 @@ def main():
 
     def repl(match: Match[str]):
         def inner(x: str):
-            first, _, second = x.partition('!')
+            first, _, second = x.rpartition('!')
             if not second:
                 return made_decisions[first]
             evaled_first = inner(first)
