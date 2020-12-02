@@ -1,6 +1,6 @@
 [tool.poetry]
 name = <$package!quote$>
-version = <$inital_version$>
+version = <$inital_version!quote$>
 description = <$description!quote$>
 authors = <$authors!split!quote$>
 license = <$license!short!quote$>
