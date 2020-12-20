@@ -313,7 +313,7 @@ def main():
     package_dir.mkdir(exist_ok=True)
     initial_version = made_decisions['inital_version']
     ver_path = (package_dir / "_version.py")
-    ver_path.write_text(f"__version__ = '{initial_version}'")
+    ver_path.write_text(f"__version__ = '{initial_version}'\n")
     run_and_get(f'git add {ver_path.relative_to(project_root)}')
 
     if args.del_script:
