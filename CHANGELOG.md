@@ -1,3 +1,3 @@
 # <$package$> Changelog
-# 0.0.1 - unreleased
+## <$inital_version$>
 * initial release

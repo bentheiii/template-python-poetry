@@ -1,4 +1,3 @@
-# install poetry and the dev-dependencies of the project
-python -m pip install poetry
-python -m poetry update --lock
-python -m poetry install
+# install the dev-dependencies of the project
+poetry update --lock
+poetry install
