@@ -14,7 +14,6 @@ packages = [
 python = <$py_versions!semver!quote$>
 
 [tool.poetry.dev-dependencies]
-pydantic = "*"
 pytest = "*"
 flake8 = { version = "*", allow-prereleases = true }
 pytest-cov = "*"
